@@ -1,522 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. [Your Name] - Academic Website</title>
-    <style>
-        /* Import fonts */
-        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-        
-        :root {
-            /* Hiroshige palette colors */
-            --hiroshige-1: #e76254;
-            --hiroshige-2: #ef8a47;
-            --hiroshige-3: #f7aa58;
-            --hiroshige-4: #ffd06f;
-            --hiroshige-5: #ffe6b7;
-            --hiroshige-6: #aadce0;
-            --hiroshige-7: #72bcd5;
-            --hiroshige-8: #528fad;
-            --hiroshige-9: #376795;
-            --hiroshige-10: #1e466e;
-            
-            /* Primary colors following Hiroshige order preference */
-            --primary-color: var(--hiroshige-6);  /* aadce0 - soft blue */
-            --secondary-color: var(--hiroshige-2); /* ef8a47 - warm orange */
-            --accent-color: var(--hiroshige-9);    /* 376795 - deep blue */
-            --text-color: var(--hiroshige-10);     /* 1e466e - darkest blue */
-            --light-bg: #fefefe;
-            --section-bg: #f8f9fa;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'EB Garamond', 'Adobe Caslon Pro', serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-bg);
-        }
-        
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background-color: var(--light-bg);
-            box-shadow: 0 1px 15px rgba(30, 70, 110, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .header-title h1 {
-            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-            font-size: 28px;
-            font-weight: 500;
-            color: var(--text-color);
-            letter-spacing: -0.5px;
-        }
-        
-        .header-title a {
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 18px;
-            font-weight: 400;
-            transition: color 0.3s ease;
-            padding: 10px 14px;
-        }
-        
-        nav a:hover {
-            background: var(--primary-color);
-            color: var(--light-bg);
-        }
-        
-        /* Banner section */
-        .banner {
-            width: 100%;
-            padding-bottom: 30%;
-            background: linear-gradient(135deg, var(--hiroshige-6), var(--hiroshige-7));
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        /* Main content grid */
-        .main-content {
-            padding: 30px 0;
-        }
-        
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
-            margin-top: 30px;
-        }
-        
-        .intro-text h2 {
-            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-        
-        .intro-text p {
-            font-size: 18px;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        
-        .intro-text a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        
-        .intro-text a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-        
-        .research-interests h2 {
-            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-        
-        /* News and Publications sections */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        
-        .news-section h2,
-        .publications-section h2 {
-            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-            font-size: 28px;
-            font-weight: 400;
-            color: var(--text-color);
-            margin-bottom: 20px;
-        }
-        
-        .news-item {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        
-        .news-date {
-            font-style: italic;
-            color: var(--hiroshige-8);
-            font-weight: 500;
-        }
-        
-        .publication {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .publication:last-child {
-            border-bottom: none;
-        }
-        
-        .publication .authors {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-        
-        .publication .title {
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 5px;
-        }
-        
-        .publication .title a {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        .publication .title a:hover {
-            color: var(--secondary-color);
-        }
-        
-        /* Tile grid */
-        .tiles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .tile {
-            background: var(--light-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(30, 70, 110, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .tile:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(30, 70, 110, 0.15);
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .tile-image {
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(135deg, var(--primary-color), var(--hiroshige-7));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: var(--light-bg);
-        }
-        
-        .tile h3 {
-            font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-            font-size: 22px;
-            font-weight: 400;
-            color: var(--text-color);
-            padding: 20px;
-            margin: 0;
-        }
-        
-        /* Different colors for different tiles */
-        .tile:nth-child(1) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-6), var(--hiroshige-7));
-        }
-        
-        .tile:nth-child(2) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-2), var(--hiroshige-3));
-        }
-        
-        .tile:nth-child(3) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-9), var(--hiroshige-8));
-        }
-        
-        .tile:nth-child(4) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-3), var(--hiroshige-4));
-        }
-        
-        .tile:nth-child(5) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-8), var(--hiroshige-9));
-        }
-        
-        .tile:nth-child(6) .tile-image {
-            background: linear-gradient(135deg, var(--hiroshige-1), var(--hiroshige-2));
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--text-color);
-            color: var(--light-bg);
-            padding: 30px 0;
-            margin-top: 60px;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .footer-links a {
-            color: var(--light-bg);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            opacity: 1;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                gap: 20px;
-            }
-            
-            .intro-grid,
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .tiles-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .banner {
-                padding-bottom: 40%;
-            }
-        }
-        
-        @media (max-width: 992px) and (min-width: 769px) {
-            .tiles-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        /* Icon styles for tiles */
-        .icon {
-            font-size: 48px;
-        }
-        
-        /* Academic icons (you can replace with actual icons) */
-        .icon-research::before { content: "🔬"; }
-        .icon-teaching::before { content: "📚"; }
-        .icon-publications::before { content: "📝"; }
-        .icon-software::before { content: "💻"; }
-        .icon-talks::before { content: "🎤"; }
-        .icon-about::before { content: "👤"; }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Noah Cowan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/academicons.min.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-title">
-                    <h1><a href="#home">Dr. [Your Name]</a></h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#research">Research</a></li>
-                        <li><a href="#teaching">Teaching</a></li>
-                    </ul>
-                </nav>
-            </div>
+
+<body class="page page-home">
+  <!-- Mobile Menu -->
+  <div id="main-menu-mobile" class="main-menu-mobile">
+    <ul>
+      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="about.html"><span>About</span></a></li>
+      <li><a href="research.html"><span>Research</span></a></li>
+      <li><a href="teaching.html"><span>Teaching</span></a></li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <div class="header">
+      <div class="container">
+        <h3 class="header-title"><a href="index.html">Noah Cowan</a></h3>
+        <!-- Desktop Menu -->
+        <div id="main-menu" class="main-menu">
+          <ul>
+            <li><a href="index.html"><span>Home</span></a></li>
+            <li><a href="about.html"><span>About</span></a></li>
+            <li><a href="research.html"><span>Research</span></a></li>
+            <li><a href="teaching.html"><span>Teaching</span></a></li>
+          </ul>
         </div>
-    </header>
+        <!-- Hamburger button for mobile -->
+        <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" role="presentation" aria-label="mobile menu trigger">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+    </div>
 
-    <main>
-        <!-- Banner -->
-        <div class="banner"></div>
-        
-        <div class="container">
-            <div class="main-content">
-                <!-- Introduction Grid -->
-                <div class="intro-grid">
-                    <div class="intro-text">
-                        <h2>Dr. [Your Name]</h2>
-                        <p>
-                            PhD Student in [Your Department] <br>
-                            at <a href="https://[your-university].edu/">[Your University]</a>
-                        </p>
-                        <p>
-                            Department of <a href="https://[your-department-url]/">[Your Department]</a><br>
-                            [Any additional affiliations]
-                        </p>
-                    </div>
-                    <div class="research-interests">
-                        <h2>Research Interests</h2>
-                        <p>[Your research interests]. Applications to [application areas]. Other topics of recent interest include [additional interests].</p>
-                    </div>
-                </div>
+    <!-- Banner Image -->
+    <div class="banner"></div>
 
-                <!-- News and Publications Grid -->
-                <div class="content-grid">
-                    <div class="news-section">
-                        <h2>News</h2>
-                        <div class="news-item">
-                            <p><em class="news-date">[Month Year].</em> [Your recent news item or achievement].</p>
-                        </div>
-                        <div class="news-item">
-                            <p><em class="news-date">[Month Year].</em> [Another news item about grants, publications, conferences, etc.]</p>
-                        </div>
-                        <div class="news-item">
-                            <p><em class="news-date">[Month Year].</em> [Additional news about your academic progress].</p>
-                        </div>
-                    </div>
-                    
-                    <div class="publications-section">
-                        <h2>Recent Publications</h2>
-                        <div class="publication">
-                            <div class="authors">[Author names]</div>
-                            <div class="title">
-                                <a href="[paper-link]">[Paper title]</a>
-                            </div>
-                            <div class="venue">[Conference/Journal name], [Year].</div>
-                        </div>
-                        <div class="publication">
-                            <div class="authors">[Author names]</div>
-                            <div class="title">
-                                <a href="[paper-link]">[Paper title]</a>
-                            </div>
-                            <div class="venue">[Conference/Journal name], [Year].</div>
-                        </div>
-                        <div class="publication">
-                            <div class="authors">[Author names]</div>
-                            <div class="title">
-                                <a href="[paper-link]">[Paper title]</a>
-                            </div>
-                            <div class="venue">[Conference/Journal name], [Year].</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tiles Grid -->
-                <div class="tiles-grid">
-                    <a href="#research" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-research"></span>
-                        </div>
-                        <h3>Research</h3>
-                    </a>
-                    
-                    <a href="#publications" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-publications"></span>
-                        </div>
-                        <h3>Publications</h3>
-                    </a>
-                    
-                    <a href="#software" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-software"></span>
-                        </div>
-                        <h3>Software</h3>
-                    </a>
-                    
-                    <a href="#teaching" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-teaching"></span>
-                        </div>
-                        <h3>Teaching</h3>
-                    </a>
-                    
-                    <a href="#talks" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-talks"></span>
-                        </div>
-                        <h3>Talks</h3>
-                    </a>
-                    
-                    <a href="#about" class="tile">
-                        <div class="tile-image">
-                            <span class="icon icon-about"></span>
-                        </div>
-                        <h3>About</h3>
-                    </a>
-                </div>
-            </div>
+    <div class="container mb-2 mt-3">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Noah Cowan</h5>
+          <p>
+            PhD Student <br>
+            at <a href="https://www.stanford.edu/">Stanford University</a>
+          </p>
+          <p>
+            Department of <a href="https://statistics.stanford.edu/">Statistics</a>
+          </p>
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <p>&copy; 2025 Dr. [Your Name]</p>
-                </div>
-                <ul class="footer-links">
-                    <li><a href="https://[your-university].edu/">[Your University]</a></li>
-                    <li><a href="https://[department-url]/">[Your Department]</a></li>
-                    <li><a href="mailto:[your-email]">Contact</a></li>
-                </ul>
-            </div>
+        <div class="col-md-6">
+          <h5>Research Interests</h5>
+          <p>My research focuses on building reliable and trustworthy machine learning systems, specifically with applications to neuroscience. I develop statistically-grounded methods for robust and uncertainty-aware neural networks, currently applying them to Brain-Computer Interfaces to decode neural signals and restore speech, where we are decoding patients' neural signals to help them regain the ability to speak.</p>
         </div>
-    </footer>
+      </div>
+
+      <!-- Page Link Tiles -->
+      <div class="row mt-6 mb-3">
+        <div class="col-4 tile">
+          <a href="about.html">
+            <img src="images/about.jpg" alt="About">
+            <h5>About</h5>
+          </a>
+        </div>
+        <div class="col-4 tile">
+          <a href="research.html">
+            <img src="images/research.jpg" alt="Research">
+            <h5>Research</h5>
+          </a>
+        </div>
+        <div class="col-4 tile">
+          <a href="teaching.html">
+            <img src="images/teaching.jpg" alt="Teaching">
+            <h5>Teaching</h5>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="footer-inner">
+            <ul class="footer-menu">
+              <li><a href="https://www.your-university.edu/">University</a></li>
+              <li><a href="#">Department</a></li>
+              <li><a href="index.html">Home</a></li>
+              <li class="copyright">© 2024 Your Name</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS files -->
+  <script type="text/javascript" src="js/scripts.min.js"></script>
 </body>
 </html>
