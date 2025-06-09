@@ -219,6 +219,35 @@ body.lock-scroll { overflow: hidden; }
   margin-bottom: 0.25rem;
 }
 
+/* Research page project blocks */
+.project-block {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+.project-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.project-title {
+  margin-bottom: 1.5rem;
+}
+.project-block img {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.project-meta {
+  font-weight: bold;
+}
+.project-description {
+  margin-top: 1rem;
+}
+.project-collaborators, .project-links {
+  margin-top: 1rem;
+}
+
 /* Generic page content */
 .page-content .title-1 { color: var(--primary-color); }
 .content { color: var(--text-color); }
