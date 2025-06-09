@@ -16,10 +16,10 @@
   --hiroshige-10: #1e466e;
   
   /* Primary colors following Hiroshige order preference */
-  --primary-color: var(--hiroshige-6);  /* aadce0 - soft blue */
+  --primary-color: var(--hiroshige-10);  /* 1e466e - darkest blue */
   --secondary-color: var(--hiroshige-2); /* ef8a47 - warm orange */
   --accent-color: var(--hiroshige-9);    /* 376795 - deep blue */
-  --text-color: var(--hiroshige-10);     /* 1e466e - darkest blue */
+  --text-color: #000000;     
   --light-bg: #fefefe;
   --section-bg: #f8f9fa;
 }
@@ -95,7 +95,7 @@ p {
   margin-right: -15px;
   margin-left: -15px;
 }
-.col-4, .col-6, .col-12, .col-md-6, .col-md-8, .justify-content-start {
+.col-4, .col-6, .col-12, .col-md-4, .col-md-6, .col-md-8, .justify-content-start {
   position: relative;
   width: 100%;
   padding-right: 15px;
@@ -105,6 +105,7 @@ p {
 .col-6 { flex: 0 0 50%; max-width: 50%; }
 .col-12 { flex: 0 0 100%; max-width: 100%; }
 @media (min-width: 768px) {
+  .col-md-4 { flex: 0 0 33.333333%; max-width: 33.333333%; }
   .col-md-6 { flex: 0 0 50%; max-width: 50%; }
   .col-md-8 { flex: 0 0 66.666667%; max-width: 66.666667%; }
 }
@@ -137,7 +138,7 @@ p {
 .header .header-title a { text-decoration: none; color: var(--primary-color); }
 
 /* Footer */
-.footer { background: var(--secondary-color); padding: 10px 0; }
+.footer { background: var(--primary-color); padding: 10px 0; }
 .footer .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-direction: column; }
 @media(min-width:576px) { .footer .footer-inner { flex-direction: row; } }
 .footer .footer-menu { list-style: none; margin: 0; padding: 0; flex: 1; text-align: center;}
@@ -187,14 +188,15 @@ body.lock-scroll { overflow: hidden; }
 .page-home .banner {
   width: 100%;
   padding-bottom: 25%; /* Adjust this for banner height */
-  background-image: url('../images/banner.jpg'); /* CHANGE THIS IMAGE */
+  background-image: url('../images/BannerWebsite.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
 }
 .page-home .tile { text-align: center; margin-bottom: 2rem; }
 .page-home .tile img { max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.2s ease-in-out; }
-.page-home .tile img:hover { transform: scale(1.05); }
+.page-home .tile img:hover { transform: scale(.95); }
+.page-home h5 { color: var(--primary-color); }
 .page-home .tile h5 { margin-top: 1rem; }
 
 /* Publications list */
@@ -211,4 +213,4 @@ body.lock-scroll { overflow: hidden; }
 /* Generic page content */
 .page-content .title-1 { color: var(--primary-color); }
 .content { color: var(--text-color); }
-.content h3 { color: var(--primary-color); }
+.content h3, .content h5 { color: var(--primary-color); }
