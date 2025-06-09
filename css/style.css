@@ -210,7 +210,23 @@ body.lock-scroll { overflow: hidden; }
 .publication .venue { font-style: italic; }
 .publication .ai { vertical-align: middle; margin-left: 5px; font-size: 1.2em; }
 
+/* Teaching page course list */
+.course-list {
+  list-style: none;
+  padding-left: 0;
+}
+.course-list li {
+  margin-bottom: 0.25rem;
+}
+
 /* Generic page content */
 .page-content .title-1 { color: var(--primary-color); }
 .content { color: var(--text-color); }
 .content h3, .content h5 { color: var(--primary-color); }
+
+/* About page photo styling */
+.about-photo {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 1.7rem; /* Adjust to align with the H1 title */
+}
