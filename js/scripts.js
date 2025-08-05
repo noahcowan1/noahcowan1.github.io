@@ -3,6 +3,7 @@
   
   const hamburger = document.getElementById("toggle-main-menu-mobile");
   const mobileMenu = document.getElementById("main-menu-mobile");
+  const closeButton = document.getElementById("close-main-menu-mobile");
   const body = document.body;
 
   if (hamburger && mobileMenu) {
@@ -24,6 +25,16 @@
         body.classList.remove("lock-scroll");
       }
     });
+
+    // Close menu when clicking the close button
+    if (closeButton) {
+      closeButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        hamburger.classList.remove("is-active");
+        mobileMenu.classList.remove("open");
+        body.classList.remove("lock-scroll");
+      });
+    }
 
     // Close menu when clicking a menu item
     const menuItems = mobileMenu.getElementsByTagName("a");
