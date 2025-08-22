@@ -1,0 +1,6 @@
+# robots.txt for https://noahcowan1.github.io/
+
+User-agent: *
+Allow: /
+
+Sitemap: https://noahcowan1.github.io/sitemap.xml
