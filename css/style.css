@@ -1,8 +1,14 @@
 /* Import Google Fonts: Poppins for titles, EB Garamond for body */
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=EB+Garamond:wght@400&display=swap";
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap');
+
 
 :root {
+  /* Font families */
+  --serif-font: 'Quattrocento', 'EB Garamond', 'Times New Roman', serif;
+  --sans-serif-font: 'Quattrocento Sans', 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
+  
   /* Hiroshige palette colors */
   --hiroshige-1: #e76254;
   --hiroshige-2: #ef8a47;
@@ -36,8 +42,8 @@ html {
 
 body {
   margin: 0;
-  /* FONT CHANGE: Use EB Garamond for body text */
-  font-family: 'EB Garamond', 'Times New Roman', serif;
+  /* FONT CHANGE: Use serif font variable for body text */
+  font-family: var(--serif-font);
   font-size: 1.1rem; /* Slightly larger for better readability */
   font-weight: 400;
   line-height: 1.6;
@@ -48,8 +54,8 @@ body {
 /* Typography */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .header-title {
   margin-bottom: .5rem;
-  /* FONT CHANGE: Use Jost */
-  font-family: 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
+  /* FONT CHANGE: Use sans-serif font variable */
+  font-family: var(--sans-serif-font);
   font-weight: 700; /* Bold Poppins */
   line-height: 1.2;
   color: inherit;
@@ -143,9 +149,9 @@ p {
 @media(min-width:576px) { .footer .footer-inner { flex-direction: row; } }
 .footer .footer-menu { list-style: none; margin: 0; padding: 0; flex: 1; text-align: center;}
 .footer .footer-menu li { display: inline-block; margin-right: 15px; }
-.footer .footer-menu li a { color: var(--hiroshige-5); text-decoration: none; font-size: .9rem; font-family: 'Jost', sans-serif; }
+.footer .footer-menu li a { color: var(--hiroshige-5); text-decoration: none; font-size: .9rem; font-family: var(--sans-serif-font); }
 .footer .footer-menu li a:hover { text-decoration: underline; }
-.footer .copyright { font-weight: 700; color: var(--hiroshige-5); text-decoration: none; font-size: .9rem; font-family: 'Jost', sans-serif;}
+.footer .copyright { font-weight: 700; color: var(--hiroshige-5); text-decoration: none; font-size: .9rem; font-family: var(--sans-serif-font);}
 
 /* Main Menu */
 .main-menu { display: none; }
@@ -157,8 +163,8 @@ p {
   display: inline-block; 
   text-decoration: none; 
   color: var(--primary-color);
-  /* FONT CHANGE: Use Jost for navigation */
-  font-family: 'Jost', sans-serif;
+  /* FONT CHANGE: Use sans-serif font variable for navigation */
+  font-family: var(--sans-serif-font);
   font-weight: 400; /* Lighter than titles */
   font-size: 1rem;
 }
@@ -209,7 +215,7 @@ p {
 .main-menu-mobile ul li a { 
   color: #fff; 
   text-decoration: none; 
-  font-family: 'Jost', sans-serif; 
+  font-family: var(--sans-serif-font); 
   padding: 10px; 
   display: block; 
   transition: color 0.2s ease;
@@ -277,7 +283,7 @@ body.lock-scroll {
   flex-shrink: 0;
   margin-right: 1rem;
   font-size: 0.95rem;
-  font-family: 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
+  font-family: var(--sans-serif-font);
 }
 .news-update {
   flex: 1;
