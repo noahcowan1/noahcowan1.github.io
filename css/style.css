@@ -1,13 +1,13 @@
 /* Import Google Fonts: Poppins for titles, EB Garamond for body */
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=EB+Garamond:wght@400&display=swap";
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital@0;1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap'); */
 
 
 :root {
   /* Font families */
-  --serif-font: 'Quattrocento', 'EB Garamond', 'Times New Roman', serif;
-  --sans-serif-font: 'Quattrocento Sans', 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
+  --serif-font: 'EB Garamond', 'Times New Roman', serif;
+  --sans-serif-font: 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
   
   /* Hiroshige palette colors */
   --hiroshige-1: #e76254;
