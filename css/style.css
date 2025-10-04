@@ -4,6 +4,36 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap'); */
 
 /* Futura PT from Stanford domain */
+/* Thin - 100 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_thin.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Light - 300 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_light.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_light-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_light-oblique.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Book/Regular - 400 */
 @font-face {
   font-family: 'Futura PT';
   src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_book.woff2') format('woff2'),
@@ -22,12 +52,98 @@
   font-display: swap;
 }
 
+/* Medium - 500 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_medium.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_medium-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_medium-oblique.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Demi/SemiBold - 600 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_demi.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_demi.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_demi-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_demi-oblique.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Bold - 700 */
 @font-face {
   font-family: 'Futura PT';
   src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold.woff2') format('woff2'),
        url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold-oblique.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Extra Bold - 800 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_extra-bold.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_extra-bold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_extra-bold-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_extra-bold-oblique.woff') format('woff');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Heavy/Black - 900 */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_heavy.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_heavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_heavy-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_heavy-oblique.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
