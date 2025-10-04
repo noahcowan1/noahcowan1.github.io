@@ -3,11 +3,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital@0;1&display=swap');
 /* @import url('https://fonts.googleapis.com/css2?family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quattrocento:wght@400;700&display=swap'); */
 
+/* Futura PT from Stanford domain */
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_book.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_book-oblique.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_book-oblique.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura PT';
+  src: url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold.woff2') format('woff2'),
+       url('https://ncowan.su.domains/Fonts/Futura-PT-Complete/futura-pt_bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 :root {
   /* Font families */
   --serif-font: 'EB Garamond', 'Times New Roman', serif;
-  --sans-serif-font: 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
+  --sans-serif-font: 'Futura PT', 'Jost', 'Futura', 'Helvetica Neue', sans-serif;
   
   /* Hiroshige palette colors */
   --hiroshige-1: #e76254;
