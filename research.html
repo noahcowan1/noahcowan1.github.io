@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Research — Robust ML, Uncertainty & BCIs | Noah Cowan</title>
   <meta name="description" content="Research on distribution shift robustness, uncertainty quantification, and brain–computer interfaces for speech restoration.">
-  <link rel="canonical" href="https://noahcowan1.github.io/research.html">
+  <link rel="canonical" href="https://noahlcowan.com/research.html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <!-- Favicon -->
@@ -16,7 +16,7 @@
   <meta property="og:type" content="article">
   <meta property="og:title" content="Research — Robust ML, Uncertainty & BCIs">
   <meta property="og:description" content="Work on robustness to distribution shift, uncertainty, and BCIs.">
-  <meta property="og:url" content="https://noahcowan1.github.io/research.html">
+  <meta property="og:url" content="https://noahlcowan.com/research.html">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -58,20 +58,43 @@
             <h1 class="title-1">Research</h1>
             <div class="content">
             Although most of my research is ongoing, here are some minor projects related to my interessts that I have worked on in the past.
+              <div class="project-block">
+                <h3 class="project-title">B-CORP: Bayesian Improvements on Continuous Online Recalibration with Pseudolabels</h3>
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="images/MSE_Synthetic.png" alt="MSE comparison on synthetic data">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="project-meta"><strong>2025</strong>, Stanford University, Stanford, USA</p>
+                    <p class="project-description">
+                      <strong>
+                        Brain–computer interfaces (BCIs) must continuously adapt as neural signals drift over time. 
+                        The CORP algorithm addresses this problem by recalibrating a pretrained decoder using pseudolabels derived from language model rescoring, but it does so in an ad hoc way—selecting a single best hypothesis without accounting for uncertainty. 
+                        We propose a simple reinterpretation of CORP as an approximate Bayesian filtering procedure (B-CORP), where recalibration corresponds to updating decoder parameters in response to evidence about likely outputs. 
+                        This perspective clarifies that CORP effectively performs coordinate ascent on a joint likelihood over both parameters and pseudo-labels, discarding the variability in the hypothesis space that could provide useful information. 
+                        Building on this insight, we introduce a marginalized version of CORP that replaces the hard pseudo-label with a soft weighting over the top candidate hypotheses. 
+                        This small change transforms the update into a smoother, lower-variance learning rule that better captures uncertainty in the pseudo-label distribution. 
+                        In a simple classification setting with drifting features but stable class probabilities, this approach leads to more stable adaptation and improved accuracy. 
+                        More broadly, this framework provides a principled link between pseudolabel–based recalibration methods and online Bayesian inference, suggesting new strategies for BCI decoders that leverage uncertainty rather than suppressing it.
+                      </strong> 
+                    </p>
+                  </div>
+                </div>
+              </div>
               <!-- Project 1 -->
               <div class="project-block">
                 <h3 class="project-title">Robustness via Sliced Wasserstein Pooling</h3>
                 <div class="row">
                   <div class="col-md-4">
-                    <img src="images/SlicedWassersteinSphere.png" alt="Sliced Wasserstein Pooling Image">
+                    <img src="images/MSE_Synthetic.png" alt="MSE comparison on synthetic data">
                   </div>
                   <div class="col-md-8">
                     <p class="project-meta"><strong>2025</strong>, Stanford University, Stanford, USA</p>
                     <p class="project-description">
-                      <strong>Description: Since much of the covariate shift that occurs in brain computer interface data is due to movement 
+                      <strong>Since much of the covariate shift that occurs in brain computer interface data is due to movement 
                         of the electrode array, we propose a method for training robust neural networks by aligning the spaces of the covariates 
                         observed on a particular day according to their Sliced Wasserstein distance. The method can be calculated efficiently and 
-                        improves performance on synthetic data.
+                        improves performance on real world intracortical brain computer interface data.
                       </strong> 
                     </p>
                   </div>
