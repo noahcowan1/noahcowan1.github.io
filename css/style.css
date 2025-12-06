@@ -200,7 +200,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .header-title {
   margin-bottom: .5rem;
   /* FONT CHANGE: Use sans-serif font variable */
   font-family: var(--sans-serif-font);
-  font-weight: 700; /* Bold Poppins */
+  font-weight: 600; /* Actually Prefer Demi */
   line-height: 1.2;
   color: inherit;
 }
@@ -421,7 +421,7 @@ body.lock-scroll {
   align-items: flex-start;
 }
 .news-date {
-  font-weight: bold;
+  font-weight: 500;
   color: var(--primary-color);
   min-width: 120px;
   flex-shrink: 0;
