@@ -61,23 +61,50 @@
 	    In order to best mitigate the impacts of this distribution shift, synthetic data can work to augment training data, build a better continual learner, and predict the impact of training data on complex systems. 
             Although much of my work is in progress, here is a subsample of some of the projects I have been working on:
               <div class="project-block">
-                <h3 class="project-title">B-CORP: Bayesian Improvements on Continuous Online Recalibration with Pseudolabels</h3>
+                <h3 class="project-title">RatGPT: A Generative Model of Social Behavior in Interacting Rats</h3>
                 <div class="row">
                   <div class="col-md-4">
-                    <img src="images/CORP_Performance.png" alt="CORP Performance on real data">
+                    <a href="ratgpt.html"><img src="images/RatGPT_Rollout.png" alt="A RatGPT-generated rollout of two interacting rats, shown in 3D over a 100 mm floor grid"></a>
+                  </div>
+                  <div class="col-md-8">
+                    <p class="project-meta"><strong>2026</strong>, Stanford University, Stanford, USA</p>
+                    <p class="project-description">
+                        Understanding the neurobiology of social behavior requires quantitative models of behavior.
+                        Advances in computer vision now enable large-scale collection of multi-animal pose data, but extracting interaction dynamics remains challenging.
+                        We present RatGPT, a self-supervised generative framework that learns joint movement distributions without manual behavior labels.
+                        A causal transformer with a flow-matching head generates trajectories of interacting rats with substantially greater realism and over longer time horizons than previous methods made possible.
+                        The model is trained on over a hundred hours of rat interaction (23-keypoint 3D pose at 50 Hz) across three autism-associated genetic lines, and its generated movements are nearly indistinguishable from real data by the human eye.
+                        Unlike HMM baselines, which failed to generate realistic rollouts even with twice as much training data, RatGPT continued to improve as the training dataset increased.
+                        In a classifier two-sample test, HMM generations were identified 99% of the time, while RatGPT generations were identified only 58% of the time, barely above the chance level of 50%.
+                        Beyond generation, the model provides well-calibrated likelihoods for each conditional distribution, so we can design experiments and metrics to draw conclusions about social behavior between animals, promising to advance our understanding of neurobiology.
+                        This framework is general enough to extract useful signal from any large enough collection of multi-agent video interactions.
+                    </p>
+                    <p class="project-collaborators"><strong>Collaborators:</strong> Cole Citrenbaum, Max Weinberg, Lily Cao, Aditi Jha, Ugne Klibaite, Ann Kennedy, Bence Ölveczky, and Scott Linderman</p>
+                    <p class="project-links">[<a href="ratgpt.html">Watch RatGPT rollouts</a>]</p>
+                  </div>
+                </div>
+              </div>
+              <div class="project-block">
+                <h3 class="project-title">B-CORP: Online Bayesian Recalibration of Brain–Computer Interfaces with Language Model Potentials</h3>
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="images/BCORP_WER_Trajectory.png" alt="Cumulative session word error rate of CORP and B-CORP across recording days on handwriting data">
                   </div>
                   <div class="col-md-8">
                     <p class="project-meta"><strong>2025</strong>, Stanford University, Stanford, USA</p>
                     <p class="project-description">
-                        Brain–computer interfaces (BCIs) must continuously adapt as neural signals drift over time. 
-                        The CORP algorithm addresses this problem by recalibrating a pretrained decoder using pseudolabels derived from language model rescoring, but it does so in an ad hoc way—selecting a single best hypothesis without accounting for uncertainty. 
-                        We propose a simple reinterpretation of CORP as an approximate Bayesian filtering procedure (B-CORP), where recalibration corresponds to updating decoder parameters in response to evidence about likely outputs. 
-                        This perspective clarifies that CORP effectively performs coordinate ascent on a joint likelihood over both parameters and pseudo-labels, discarding the variability in the hypothesis space that could provide useful information. 
-                        Building on this insight, we introduce a marginalized version of CORP that replaces the hard pseudo-label with a soft weighting over the top candidate hypotheses. 
-                        This small change transforms the update into a smoother, lower-variance learning rule that better captures uncertainty in the pseudo-label distribution. 
-                        In a simple classification setting with drifting features but stable class probabilities, this approach leads to more stable adaptation and improved accuracy. 
-                        More broadly, this framework provides a principled link between pseudolabel–based recalibration methods and online Bayesian inference, suggesting new strategies for BCI decoders that leverage uncertainty rather than suppressing it.
+                        Brain–computer interfaces (BCIs) must continually adapt as neural signals drift, yet labeled calibration data is expensive to collect at time of use.
+                        Recent systems address this challenge by updating neural decoders using language-model–pseudo-labels, but they treat the pseudo-label as ground truth.
+                        We reinterpret recalibration as approximate Bayesian filtering: the decoder parameters are the latent states, and language models provide observations in the form of unnormalized potentials.
+                        Guided by this analysis, we introduce B-CORP (Bayesian Continual Online Recalibration with Pseudo-labels).
+                        B-CORP replaces hard pseudo-labels with a soft top-<em>K</em> marginalization, increases the number of iterations in the coordinate ascent on the joint likelihood, and models parameter drift with a prior on latent dynamics.
+                        Across synthetic drifting regression tasks and real BCI benchmarks, including handwriting and speech BCI datasets, B-CORP attains word error rates consistently under 3% on a difficult handwriting BCI dataset.
+                        B-CORP improves almost 30% versus the state-of-the-art, while retaining performance even with poor pseudo-labels where naive methods fail.
+                        More broadly, our approach connects pseudo-label recalibration with online Bayesian inference, providing a principled foundation for problems requiring long-term recalibration with access to black box predictive models, such as LLMs, for use as strong priors over the labels.
                     </p>
+                    <p class="project-venue"><em>Neural Information Processing Systems (NeurIPS)</em>, 2026</p>
+                    <p class="project-collaborators"><strong>Collaborators:</strong> Scott Linderman</p>
+                    <p class="project-links">[<a href="https://neurips.cc/virtual/2026/loc/sydney/poster/151000">NeurIPS</a>]</p>
                   </div>
                 </div>
               </div>

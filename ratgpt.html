@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RatGPT Rollouts | Noah Cowan</title>
+  <meta name="description" content="Generated rollouts of interacting rats from RatGPT, a causal transformer with a flow-matching head, played next to the recorded behaviour.">
+  <link rel="canonical" href="https://noahlcowan.com/ratgpt.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="RatGPT Rollouts">
+  <meta property="og:description" content="Generated social behaviour of interacting rats, side by side with what the rats actually did.">
+  <meta property="og:url" content="https://noahlcowan.com/ratgpt.html">
+  <meta property="og:image" content="https://noahlcowan.com/images/RatGPT_Rollout.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ro-controls { display: grid; gap: 0.75rem; margin: 1.5rem 0 1rem; font-family: var(--sans-serif-font); }
+    .ro-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    .ro-ctl > span { min-width: 7.5rem; color: var(--primary-color); font-size: 0.95rem; }
+    .ro-seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--hiroshige-8); border-radius: 5px; overflow: hidden; }
+    .ro-seg button { font: inherit; font-size: 0.9rem; padding: 0.2rem 0.65rem; border: 0; border-left: 1px solid var(--hiroshige-8);
+      background: #fff; color: var(--primary-color); cursor: pointer; }
+    .ro-seg button:first-child { border-left: 0; }
+    .ro-seg button[aria-pressed="true"] { background: var(--primary-color); color: var(--hiroshige-5); }
+    .ro-seg button:focus-visible, .ro-btn:focus-visible, #ro-scrub:focus-visible, #ro-speed:focus-visible { outline: 2px solid var(--hiroshige-2); outline-offset: 1px; }
+    .ro-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    @media (max-width: 700px) { .ro-stage { grid-template-columns: minmax(0, 1fr); } .ro-ctl > span { min-width: 0; width: 100%; } }
+    .ro-panel { border: 1px solid #e3e3e3; border-radius: 5px; padding: 0.6rem; background: #fff; min-width: 0; }
+    .ro-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    .ro-head h3 { margin: 0; font-size: 1.15rem; }
+    .ro-tag { font-family: var(--sans-serif-font); font-size: 0.85rem; color: #666; }
+    .ro-panel canvas { display: block; width: 100%; aspect-ratio: 4 / 3; }
+    .ro-time { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-top: 1rem; font-family: var(--sans-serif-font); }
+    .ro-btn { font: inherit; font-size: 0.95rem; padding: 0.2rem 0.9rem; min-width: 5rem; border: 1px solid var(--primary-color);
+      border-radius: 5px; background: var(--primary-color); color: var(--hiroshige-5); cursor: pointer; }
+    #ro-speed { font: inherit; font-size: 0.9rem; padding: 0.15rem 0.3rem; border: 1px solid var(--hiroshige-8); border-radius: 5px; background: #fff; }
+    #ro-clock { font-variant-numeric: tabular-nums; min-width: 4.5rem; color: var(--primary-color); }
+    #ro-scrub { flex: 1 1 220px; min-width: 0; accent-color: var(--primary-color); }
+    .ro-phases { position: relative; height: 1.3rem; font-family: var(--sans-serif-font); font-size: 0.8rem; color: #666; margin-top: 0.25rem; }
+    .ro-phases div { position: absolute; top: 0; bottom: 0; border-left: 1px solid #bbb; padding-left: 0.3rem; white-space: nowrap; overflow: hidden; }
+    .ro-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; align-items: center; font-family: var(--sans-serif-font); font-size: 0.9rem; color: #444; margin-top: 0.75rem; }
+    .ro-legend i { display: inline-block; width: 1.1rem; height: 3px; margin-right: 0.35rem; vertical-align: middle; }
+    .ro-note { font-size: 0.95rem; color: #444; margin-top: 0.75rem; }
+    .ro-hint[hidden] { display: none; }
+  </style>
+</head>
+
+<body class="page page-research">
+  <div id="main-menu-mobile" class="main-menu-mobile">
+    <button id="close-main-menu-mobile" class="mobile-menu-close" aria-label="Close mobile menu">
+      <span>&times;</span>
+    </button>
+    <ul>
+      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="about.html"><span>About</span></a></li>
+      <li><a href="research.html"><span>Research</span></a></li>
+      <li><a href="teaching.html"><span>Teaching</span></a></li>
+    </ul>
+  </div>
+
+  <div class="wrapper">
+    <div class="header">
+      <div class="container">
+        <h3 class="header-title"><a href="index.html">Noah Cowan</a></h3>
+        <div id="main-menu" class="main-menu">
+          <ul>
+            <li><a href="index.html"><span>Home</span></a></li>
+            <li><a href="about.html"><span>About</span></a></li>
+            <li><a href="research.html"><span>Research</span></a></li>
+            <li><a href="teaching.html"><span>Teaching</span></a></li>
+          </ul>
+        </div>
+        <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" role="presentation" aria-label="mobile menu trigger">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container pt-4 pt-md-10">
+      <div class="row">
+        <div class="col-12">
+          <div class="page-content">
+            <h1 class="title-1">RatGPT Rollouts</h1>
+            <div class="content">
+              <p>
+                Each clip starts from 2.56 s of recorded behaviour of two interacting rats (23-keypoint 3D pose).
+                From there, a RatGPT model generates what happens next, and the recording on the right shows what the rats actually did.
+                Every model continues the same context with the same source noise, so the differences between models come from the model, not from sampling luck.
+                Pick a model size and the share of training data it saw to see how realism improves with scale.
+                [<a href="research.html">Back to Research</a>]
+              </p>
+
+              <div class="ro-controls">
+                <div class="ro-ctl"><span>Model size</span><div class="ro-seg" id="c-size"></div></div>
+                <div class="ro-ctl"><span>Training data</span><div class="ro-seg" id="c-data"></div></div>
+                <div class="ro-ctl"><span>Recording</span><div class="ro-seg" id="c-win"></div></div>
+                <div class="ro-ctl"><span>View</span><div class="ro-seg" id="c-view"></div><span class="ro-tag ro-hint" id="ro-hint" hidden>Drag either panel to turn both. Double-click resets.</span></div>
+              </div>
+
+              <div class="ro-stage">
+                <div class="ro-panel"><div class="ro-head"><h3 id="ro-title">RatGPT</h3><span class="ro-tag" id="ro-tag"></span></div>
+                  <canvas id="ro-model" role="img" aria-label="Generated rollout, both rats"></canvas></div>
+                <div class="ro-panel"><div class="ro-head"><h3>Recorded</h3><span class="ro-tag">what the rats did next</span></div>
+                  <canvas id="ro-real" role="img" aria-label="Recorded continuation, both rats"></canvas></div>
+              </div>
+
+              <div class="ro-time">
+                <button type="button" class="ro-btn" id="ro-play" aria-pressed="false">Play</button>
+                <select id="ro-speed" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+                <span id="ro-clock">0.00 s</span>
+                <input type="range" id="ro-scrub" min="0" max="1" value="0" step="1" aria-label="Time in the clip">
+              </div>
+              <div class="ro-phases" id="ro-phases" aria-hidden="true"></div>
+              <div class="ro-legend"><span><i style="background:#376795"></i>Rat A</span><span><i style="background:#e76254"></i>Rat B</span><span>Faint line: each rat's mid-spine path over the generated part. Grid: 100 mm.</span></div>
+              <p class="ro-note" id="ro-note">Loading rollouts…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="footer-inner">
+            <ul class="footer-menu">
+              <li><a href="https://www.stanford.edu/">Stanford University</a></li>
+              <li><a href="https://statistics.stanford.edu/">Department of Statistics</a></li>
+              <li><a href="index.html">Home</a></li>
+              <li class="copyright"> Copyright © 2025 Noah Cowan, colors + art inspired by Hiroshige palette of <a href="https://github.com/BlakeRMills/MetBrewer">MetBrewer</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/scripts.min.js"></script>
+  <script>
+  (() => {
+    const BASE = "data/ratgpt/";
+    const COLORS = ["#376795", "#e76254"], GRID = "#e6e6e6", MUTED = "#777", FONT = "'Futura PT', 'Jost', 'Helvetica Neue', sans-serif";
+    const PER = 2 * 23 * 3;
+    const state = {size: "l10w460h2848", data: 1, win: 0, view: "top"};
+    const RO = {meta: null, real: null, cache: new Map(), gen: null, frame: 0, playing: false, last: 0, visible: true, geo: null, yaw: -0.5, pitch: 0.6};
+    const ORBIT_START = {yaw: -0.5, pitch: 0.6};
+    const $ = id => document.getElementById(id);
+    const fmtP = p => p >= 1e8 ? `${Math.round(p / 1e6)}M` : `${(p / 1e6).toFixed(1)}M`;
+    const fmtD = d => `${+(d * 100).toFixed(2)}%`;
+    const fmtDay = d => { const ymd = d.split("_")[1]; return `${+ymd.slice(6, 8)} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][+ymd.slice(4, 6) - 1]} ${ymd.slice(0, 4)}`; };
+    const fetchBin = path => fetch(BASE + path).then(r => { if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`); return r.arrayBuffer(); }).then(b => new Int16Array(b));
+    const cell = () => RO.meta.cells.find(c => c.model_id === state.size && c.data_fraction === state.data);
+
+    function seg(id, key, items, onChange) {
+      const host = $(id); host.replaceChildren();
+      for (const [v, label] of items) {
+        const b = document.createElement("button"); b.type = "button"; b.textContent = label;
+        b.setAttribute("aria-pressed", String(state[key] === v));
+        b.addEventListener("click", () => { state[key] = v; for (const x of host.children) x.setAttribute("aria-pressed", String(x === b)); onChange(); });
+        host.appendChild(b);
+      }
+    }
+    // Model frames before the end of the context are the recorded context itself.
+    function at(gen, w, f) {
+      const F = RO.meta.frames, C = RO.meta.context_frames;
+      return gen && f >= C ? [gen, (w * (F - C) + f - C) * PER] : [RO.real, (w * F + f) * PER];
+    }
+    const val = (arr, off, r, j, a) => arr[off + (r * 23 + j) * 3 + a] * RO.meta.unit_mm;
+    function bodySpeeds(gen, w) {
+      const C = RO.meta.context_frames, F = RO.meta.frames, out = [];
+      for (let r = 0; r < 2; r++) {
+        let total = 0, prev = null;
+        for (let f = C; f < F; f++) {
+          const [arr, off] = at(gen, w, f); let x = 0, y = 0;
+          for (let j = 0; j < 23; j++) { x += val(arr, off, r, j, 0); y += val(arr, off, r, j, 1); }
+          x /= 23; y /= 23; if (prev) total += Math.hypot(x - prev[0], y - prev[1]); prev = [x, y];
+        }
+        out.push(total / ((F - C - 1) / RO.meta.fps));
+      }
+      return out;
+    }
+    function geometry() {
+      const w = state.win, lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+      const each = fn => { for (const gen of [null, RO.gen]) for (let f = 0; f < RO.meta.frames; f++) { const [arr, off] = at(gen, w, f); for (let r = 0; r < 2; r++) for (let j = 0; j < 23; j++) fn(val(arr, off, r, j, 0), val(arr, off, r, j, 1), val(arr, off, r, j, 2)); } };
+      each((x, y, z) => { const v = [x, y, z]; for (let a = 0; a < 3; a++) { if (v[a] < lo[a]) lo[a] = v[a]; if (v[a] > hi[a]) hi[a] = v[a]; } });
+      const c = lo.map((v, a) => (v + hi[a]) / 2);
+      if (state.view === "orbit") {
+        // Fit the bounding sphere, so the scale stays fixed while the view turns.
+        let r2 = 0; each((x, y, z) => { r2 = Math.max(r2, (x - c[0]) ** 2 + (y - c[1]) ** 2 + (z - c[2]) ** 2); });
+        return {lo, hi, c, span: 2 * Math.sqrt(r2) * 1.04 + 20};
+      }
+      const ay = state.view === "top" ? 1 : 2;
+      return {lo, hi, c, span: Math.max((hi[0] - lo[0]) * 0.75, hi[ay] - lo[ay]) * 1.1 + 20};
+    }
+    // World mm -> view-plane mm around the scene centre. Orbit: turn by yaw about the vertical, then tilt by
+    // elevation (0 = side view, pi/2 = top view), orthographic.
+    function projection(g) {
+      const [cx, cy, cz] = g.c;
+      if (state.view === "top") return (x, y) => [x - cx, y - cy];
+      if (state.view === "side") return (x, y, z) => [x - cx, z - cz];
+      const cw = Math.cos(RO.yaw), sw = Math.sin(RO.yaw), ce = Math.cos(RO.pitch), se = Math.sin(RO.pitch);
+      return (x, y, z) => { x -= cx; y -= cy; z -= cz; return [x * cw - y * sw, (x * sw + y * cw) * se + z * ce]; };
+    }
+    function drawOne(canvas, gen) {
+      const dpr = Math.min(devicePixelRatio || 1, 2), W = Math.round((canvas.clientWidth || 400) * dpr), H = Math.round(W * 3 / 4);
+      if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+      const g = RO.geo, s = H / g.span, w = state.win, C = RO.meta.context_frames, F = RO.meta.frames;
+      const f = Math.max(0, Math.min(F - 1, Math.floor(RO.frame)));
+      const P = projection(g), SX = u => u * s + W / 2, SY = v => H / 2 - v * s;
+      const pt = (arr, off, r, j) => { const [u, v] = P(val(arr, off, r, j, 0), val(arr, off, r, j, 1), val(arr, off, r, j, 2)); return [SX(u), SY(v)]; };
+      const ctx = canvas.getContext("2d");
+      const line = (a, b) => { const [u0, v0] = P(...a), [u1, v1] = P(...b); ctx.beginPath(); ctx.moveTo(SX(u0), SY(v0)); ctx.lineTo(SX(u1), SY(v1)); ctx.stroke(); };
+      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = GRID; ctx.lineWidth = dpr;
+      if (state.view === "orbit") {
+        // 100 mm grid on the floor (the lowest tracked point), under the rats' extent.
+        const [x0, y0, z0] = g.lo, [x1, y1] = g.hi, gx0 = Math.floor(x0 / 100) * 100, gx1 = Math.ceil(x1 / 100) * 100, gy0 = Math.floor(y0 / 100) * 100, gy1 = Math.ceil(y1 / 100) * 100;
+        for (let x = gx0; x <= gx1; x += 100) line([x, gy0, z0], [x, gy1, z0]);
+        for (let y = gy0; y <= gy1; y += 100) line([gx0, y, z0], [gx1, y, z0]);
+      } else {
+        const ay = state.view === "top" ? 1 : 2, hu = W / s / 2, hv = H / s / 2;
+        for (let x = Math.ceil((g.c[0] - hu) / 100) * 100; x < g.c[0] + hu; x += 100) { ctx.beginPath(); ctx.moveTo(SX(x - g.c[0]), 0); ctx.lineTo(SX(x - g.c[0]), H); ctx.stroke(); }
+        for (let y = Math.ceil((g.c[ay] - hv) / 100) * 100; y < g.c[ay] + hv; y += 100) { ctx.beginPath(); ctx.moveTo(0, SY(y - g.c[ay])); ctx.lineTo(W, SY(y - g.c[ay])); ctx.stroke(); }
+      }
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      for (let r = 0; r < 2; r++) {
+        ctx.strokeStyle = COLORS[r];
+        ctx.globalAlpha = 0.25; ctx.lineWidth = 1.5 * dpr; ctx.beginPath();
+        for (let k = C; k < F; k++) { const [arr, off] = at(gen, w, k); const [x, y] = pt(arr, off, r, 4); k === C ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+        ctx.stroke();
+        ctx.globalAlpha = 0.6; ctx.lineWidth = 2 * dpr; ctx.beginPath();
+        for (let k = Math.max(0, f - 25); k <= f; k++) { const [arr, off] = at(gen, w, k); const [x, y] = pt(arr, off, r, 4); k === Math.max(0, f - 25) ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+        ctx.stroke(); ctx.globalAlpha = 1;
+      }
+      const [arr, off] = at(gen, w, f);
+      for (let r = 0; r < 2; r++) {
+        ctx.strokeStyle = COLORS[r]; ctx.fillStyle = COLORS[r]; ctx.lineWidth = 2 * dpr; ctx.beginPath();
+        for (const [a, b] of RO.meta.bones) { const pa = pt(arr, off, r, a), pb = pt(arr, off, r, b); ctx.moveTo(...pa); ctx.lineTo(...pb); }
+        ctx.stroke();
+        for (let j = 0; j < 23; j++) { const [x, y] = pt(arr, off, r, j); ctx.beginPath(); ctx.arc(x, y, (j === 0 ? 3.2 : 1.9) * dpr, 0, 2 * Math.PI); ctx.fill(); }
+      }
+      ctx.strokeStyle = MUTED; ctx.fillStyle = MUTED; ctx.lineWidth = 2 * dpr;
+      const bx = 10 * dpr, by = H - 12 * dpr;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + 100 * s, by); ctx.stroke();
+      ctx.font = `${11 * dpr}px ${FONT}`; ctx.fillText("100 mm", bx, by - 5 * dpr);
+    }
+    function draw() {
+      if (!RO.meta || !RO.geo) return;
+      drawOne($("ro-model"), RO.gen);
+      drawOne($("ro-real"), null);
+      const f = Math.max(0, Math.min(RO.meta.frames - 1, Math.floor(RO.frame)));
+      $("ro-tag").textContent = !RO.gen ? "loading…" : f < RO.meta.context_frames ? "recorded context" : "generated";
+      $("ro-clock").textContent = `${(f / RO.meta.fps).toFixed(2)} s`;
+      $("ro-scrub").value = String(f);
+    }
+    function setView() {
+      const orbit = state.view === "orbit";
+      $("ro-hint").hidden = !orbit;
+      for (const id of ["ro-model", "ro-real"]) {
+        const c = $(id);
+        c.style.cursor = orbit ? "grab" : ""; c.style.touchAction = orbit ? "none" : "";
+        if (orbit) c.setAttribute("tabindex", "0"); else c.removeAttribute("tabindex");
+      }
+      if (RO.meta) { RO.geo = geometry(); draw(); }
+    }
+    // Drag (or arrow keys) on either panel turns both; double-click returns to the starting angle.
+    function bindOrbit(canvas) {
+      let drag = null;
+      const turn = (dyaw, dpitch) => { RO.yaw += dyaw; RO.pitch = Math.max(0, Math.min(Math.PI / 2, RO.pitch + dpitch)); draw(); };
+      canvas.addEventListener("pointerdown", e => { if (state.view !== "orbit") return; drag = {x: e.clientX, y: e.clientY}; canvas.setPointerCapture(e.pointerId); canvas.style.cursor = "grabbing"; });
+      canvas.addEventListener("pointermove", e => { if (!drag) return; turn((e.clientX - drag.x) * 0.01, (e.clientY - drag.y) * 0.01); drag = {x: e.clientX, y: e.clientY}; });
+      const end = () => { drag = null; if (state.view === "orbit") canvas.style.cursor = "grab"; };
+      canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+      canvas.addEventListener("dblclick", () => { if (state.view !== "orbit") return; Object.assign(RO, ORBIT_START); draw(); });
+      canvas.addEventListener("keydown", e => {
+        const k = {ArrowLeft: [-0.1, 0], ArrowRight: [0.1, 0], ArrowUp: [0, -0.1], ArrowDown: [0, 0.1]}[e.key];
+        if (state.view !== "orbit" || !k) return;
+        e.preventDefault(); turn(...k);
+      });
+    }
+    function note() {
+      const c = cell(), w = RO.meta.windows[state.win];
+      const rs = bodySpeeds(null, state.win), ms = RO.gen ? bodySpeeds(RO.gen, state.win) : null;
+      const sp = v => `${Math.round(v[0])} / ${Math.round(v[1])}`;
+      $("ro-title").textContent = `RatGPT · ${fmtP(c.parameters)} · ${fmtD(c.data_fraction)} data`;
+      $("ro-note").textContent = `${fmtP(c.parameters)}-parameter model trained on ${fmtD(c.data_fraction)} of the unique training data for 16 epochs; held-out NLL ${c.nll_e016.toFixed(3)} per dimension. ` +
+        `Recording: ${w.cohort} line, ${fmtDay(w.day)}. Mean body speed over the generated part, rat A / rat B: model ${ms ? sp(ms) : "…"} mm/s, recorded ${sp(rs)} mm/s. ` +
+        `Each clip is a single sample, so it shows one draw rather than the model's typical behaviour.`;
+    }
+    async function select() {
+      if (!RO.meta) return;
+      const c = cell();
+      if (!RO.cache.has(c.file)) RO.cache.set(c.file, fetchBin(c.file));
+      RO.gen = null; RO.geo = geometry(); note(); draw();
+      try {
+        const gen = await RO.cache.get(c.file);
+        const want = RO.meta.windows.length * (RO.meta.frames - RO.meta.context_frames) * PER;
+        if (gen.length !== want) throw new Error(`${c.file} has ${gen.length} values, expected ${want}`);
+        if (cell() !== c) return;
+        RO.gen = gen; RO.geo = geometry(); note(); draw();
+      } catch (err) { RO.cache.delete(c.file); $("ro-note").textContent = `Could not load this rollout: ${err.message}`; }
+    }
+    function tick(now) {
+      if (!RO.playing || !RO.visible) { RO.last = 0; return; }
+      const dt = RO.last ? (now - RO.last) / 1000 : 0; RO.last = now;
+      RO.frame += dt * RO.meta.fps * +$("ro-speed").value;
+      if (RO.frame >= RO.meta.frames) RO.frame = 0;
+      draw(); requestAnimationFrame(tick);
+    }
+    function play(on) {
+      RO.playing = on; RO.last = 0;
+      const b = $("ro-play"); b.textContent = on ? "Pause" : "Play"; b.setAttribute("aria-pressed", String(on));
+      if (on) requestAnimationFrame(tick);
+    }
+    async function init() {
+      seg("c-view", "view", [["top", "From above"], ["side", "From the side"], ["orbit", "Drag to rotate"]], setView);
+      for (const id of ["ro-model", "ro-real"]) bindOrbit($(id));
+      setView();
+      $("ro-play").addEventListener("click", () => play(!RO.playing));
+      $("ro-scrub").addEventListener("input", e => { RO.frame = +e.target.value; draw(); });
+      addEventListener("resize", draw);
+      try {
+        const [meta, real] = await Promise.all([fetch(BASE + "meta.json").then(r => { if (!r.ok) throw new Error(`meta.json: HTTP ${r.status}`); return r.json(); }), fetchBin("recorded.bin")]);
+        if (real.length !== meta.windows.length * meta.frames * PER) throw new Error("recorded clips have the wrong size");
+        RO.meta = meta; RO.real = real;
+      } catch (err) {
+        // Browsers block fetch() for pages opened straight from disk, so say how to view it instead.
+        $("ro-note").textContent = location.protocol === "file:"
+          ? "The rollouts can't load from a page opened as a local file. Serve the site folder (for example with python3 -m http.server) and open http://localhost:8000/ratgpt.html, or view it on the published site."
+          : `Could not load the rollouts: ${err.message}`;
+        return;
+      }
+      const sizes = [...new Map(RO.meta.cells.map(c => [c.model_id, c.parameters])).entries()].sort((a, b) => a[1] - b[1]);
+      const fracs = [...new Set(RO.meta.cells.map(c => c.data_fraction))].sort((a, b) => a - b);
+      seg("c-size", "size", sizes.map(([id, p]) => [id, fmtP(p)]), select);
+      seg("c-data", "data", fracs.map(d => [d, fmtD(d)]), select);
+      seg("c-win", "win", RO.meta.windows.map((w, i) => [i, `${w.cohort} · ${fmtDay(w.day)}`]), select);
+      const C = RO.meta.context_frames, F = RO.meta.frames, sec = v => `${(v / RO.meta.fps).toFixed(2)} s`;
+      $("ro-scrub").max = String(F - 1);
+      const ph = $("ro-phases"); ph.replaceChildren();
+      for (const [a, b, label] of [[0, C, `recorded context, 0–${sec(C)}`], [C, F, `generated, ${sec(C)}–${sec(F)}`]]) {
+        const d = document.createElement("div"); d.textContent = label; d.style.left = `${100 * a / F}%`; d.style.width = `${100 * (b - a) / F}%`; ph.appendChild(d);
+      }
+      new IntersectionObserver(es => { RO.visible = es[0].isIntersecting; if (RO.visible && RO.playing) { RO.last = 0; requestAnimationFrame(tick); } }).observe($("ro-model"));
+      RO.frame = C;
+      await select();
+      play(!matchMedia("(prefers-reduced-motion: reduce)").matches);
+    }
+    init();
+  })();
+  </script>
+</body>
+</html>
