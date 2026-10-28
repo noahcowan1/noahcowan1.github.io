@@ -89,8 +89,7 @@
               <p>
                 Each clip starts from 2.56 s of recorded behaviour of two interacting rats (23-keypoint 3D pose).
                 From there, a RatGPT model generates what happens next, and the recording on the right shows what the rats actually did.
-                Every model continues the same context with the same source noise, so the differences between models come from the model, not from sampling luck.
-                Pick a model size and the share of training data it saw to see how realism improves with scale.
+                Pick a model size and the share of training data it saw to see how rollouts change with scale. Send me a message if you find anything cool.
                 [<a href="research.html">Back to Research</a>]
               </p>
 
@@ -172,19 +171,6 @@
       return gen && f >= C ? [gen, (w * (F - C) + f - C) * PER] : [RO.real, (w * F + f) * PER];
     }
     const val = (arr, off, r, j, a) => arr[off + (r * 23 + j) * 3 + a] * RO.meta.unit_mm;
-    function bodySpeeds(gen, w) {
-      const C = RO.meta.context_frames, F = RO.meta.frames, out = [];
-      for (let r = 0; r < 2; r++) {
-        let total = 0, prev = null;
-        for (let f = C; f < F; f++) {
-          const [arr, off] = at(gen, w, f); let x = 0, y = 0;
-          for (let j = 0; j < 23; j++) { x += val(arr, off, r, j, 0); y += val(arr, off, r, j, 1); }
-          x /= 23; y /= 23; if (prev) total += Math.hypot(x - prev[0], y - prev[1]); prev = [x, y];
-        }
-        out.push(total / ((F - C - 1) / RO.meta.fps));
-      }
-      return out;
-    }
     function geometry() {
       const w = state.win, lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
       const each = fn => { for (const gen of [null, RO.gen]) for (let f = 0; f < RO.meta.frames; f++) { const [arr, off] = at(gen, w, f); for (let r = 0; r < 2; r++) for (let j = 0; j < 23; j++) fn(val(arr, off, r, j, 0), val(arr, off, r, j, 1), val(arr, off, r, j, 2)); } };
@@ -285,13 +271,9 @@
       });
     }
     function note() {
-      const c = cell(), w = RO.meta.windows[state.win];
-      const rs = bodySpeeds(null, state.win), ms = RO.gen ? bodySpeeds(RO.gen, state.win) : null;
-      const sp = v => `${Math.round(v[0])} / ${Math.round(v[1])}`;
+      const c = cell();
       $("ro-title").textContent = `RatGPT · ${fmtP(c.parameters)} · ${fmtD(c.data_fraction)} data`;
-      $("ro-note").textContent = `${fmtP(c.parameters)}-parameter model trained on ${fmtD(c.data_fraction)} of the unique training data for 16 epochs; held-out NLL ${c.nll_e016.toFixed(3)} per dimension. ` +
-        `Recording: ${w.cohort} line, ${fmtDay(w.day)}. Mean body speed over the generated part, rat A / rat B: model ${ms ? sp(ms) : "…"} mm/s, recorded ${sp(rs)} mm/s. ` +
-        `Each clip is a single sample, so it shows one draw rather than the model's typical behaviour.`;
+      $("ro-note").textContent = "";
     }
     async function select() {
       if (!RO.meta) return;
