@@ -321,7 +321,11 @@
       const fracs = [...new Set(RO.meta.cells.map(c => c.data_fraction))].sort((a, b) => a - b);
       seg("c-size", "size", sizes.map(([id, p]) => [id, fmtP(p)]), select);
       seg("c-data", "data", fracs.map(d => [d, fmtD(d)]), select);
-      seg("c-win", "win", RO.meta.windows.map((w, i) => [i, `${w.cohort} · ${fmtDay(w.day)}`]), select);
+      // Buttons list SCN2A first and ARID1B last, earliest day first within each; the index still points into the data files' order.
+      const COHORTS = ["SCN2A", "NRXN1", "ARID1B"];
+      const wins = RO.meta.windows.map((w, i) => [i, w]).sort((a, b) => COHORTS.indexOf(a[1].cohort) - COHORTS.indexOf(b[1].cohort) || a[1].day.localeCompare(b[1].day));
+      state.win = wins[0][0];
+      seg("c-win", "win", wins.map(([i, w]) => [i, `${w.cohort} · ${fmtDay(w.day)}`]), select);
       const C = RO.meta.context_frames, F = RO.meta.frames, sec = v => `${(v / RO.meta.fps).toFixed(2)} s`;
       $("ro-scrub").max = String(F - 1);
       const ph = $("ro-phases"); ph.replaceChildren();
